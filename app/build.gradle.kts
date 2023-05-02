@@ -5,10 +5,16 @@ plugins {
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
-
+//Ref : https://www.apollographql.com/docs/kotlin/v2/tutorial/01-configure-project/
 apollo {
+    generateKotlinModels.set(true)
     service("service") {
         packageName.set("com.plcoding")
+        sourceFolder.set("com/plcoding")
+    }
+    service("jys") {
+        packageName.set("com.jys")
+//        sourceFolder.set("com/jys")
     }
 }
 
@@ -40,7 +46,8 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+        freeCompilerArgs = listOf("-Xjsr305=strict","-progressive")
     }
     buildFeatures {
         compose = true
